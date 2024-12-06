@@ -1,34 +1,22 @@
-const http = require("http");
-const fs = require("fs");
+const express = require("express");
+const app = express();
 
-const server = http.createServer((req, res) => {
-    let path = "./views/";
-    let status = 200;
-
-    switch (req.url) {
-        case "/":
-            path += "index.html";
-            break;
-
-        case "/about":
-            path += "about.html";
-            break;
-
-        case "/contact-me":
-            path += "contact.html";
-            break;
-
-        default:
-            path += "404.html";
-            status = 400;
-    }
-
-    fs.readFile(path, (err, data) => {
-        if (err) throw err;
-
-        res.writeHead(status, { "Content-Type": "text/html" });
-        res.end(data);
-    });
+app.get("/", (req, res) => {
+    res.sendFile("./views/index.html", { root: __dirname });
 });
 
-server.listen(3000);
+app.get("/about", (req, res) => {
+    res.sendFile("./views/about.html", { root: __dirname });
+});
+
+app.get("/contact-me", (req, res) => {
+    res.sendFile("./views/contact.html", { root: __dirname });
+});
+
+app.use((req, res) => {
+    res.sendFile("./views/404.html", { root: __dirname });
+});
+
+const PORT = 5173;
+
+app.listen(PORT);
