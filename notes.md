@@ -1,0 +1,3 @@
+-   need navbar.
+-   styling is optional prob wont do it or jsut do the bare minimum
+-   dont know for content might check online for reference.

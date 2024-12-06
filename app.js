@@ -2,16 +2,28 @@ const http = require("http");
 const fs = require("fs");
 
 const server = http.createServer((req, res) => {
-    res.writeHead("200", "text/html");
-    res.end("<h1>Hello World</h1>");
+    let path = "./views/";
+    let status = 200;
+
+    switch (req.url) {
+        case "/":
+            path += "index.html";
+            break;
+
+        // TODO: About Page
+        // TODO: Contact Page
+
+        default:
+            path += "404.html";
+            status = 400;
+    }
+
+    fs.readFile(path, (err, data) => {
+        if (err) throw err;
+
+        res.writeHead(status, { "Content-Type": "text/html" });
+        res.end(data);
+    });
 });
 
 server.listen(3000);
-
-// TODO: Index Page
-
-// TODO: About Page
-
-// TODO: Contact Page
-
-// TODO: 404 Page
