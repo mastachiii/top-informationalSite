@@ -10,8 +10,13 @@ const server = http.createServer((req, res) => {
             path += "index.html";
             break;
 
-        // TODO: About Page
-        // TODO: Contact Page
+        case "/about":
+            path += "about.html";
+            break;
+
+        case "/contact-me":
+            path += "contact.html";
+            break;
 
         default:
             path += "404.html";
